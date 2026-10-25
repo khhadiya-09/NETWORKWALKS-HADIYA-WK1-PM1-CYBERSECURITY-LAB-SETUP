@@ -44,7 +44,7 @@ The NAT Network is named `NatNetwork`, uses the IPv4 prefix `10.0.0.0/24`, and h
 
 The `sf_downloads` shared-folder shortcut is visible on the Kali desktop.
 
-![Kali Linux showing the shared folder](./02-kali-desktop-and-shared-folder.png)
+![Kali Linux showing the shared folder](02-kali-desktop-shared-folder.png)
 
 ### 3. Kali Static IPv4 Settings
 
