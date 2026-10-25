@@ -33,25 +33,24 @@ The goal is to prepare a repeatable environment for future cybersecurity labs an
 
 ## Screenshots
 
-Keep the `screenshots/` folder in the repository alongside this README. The image links below use relative paths, so the screenshots should render when the folder and filenames are uploaded unchanged.
 
 ### 1. VirtualBox NAT Network
 
 The NAT Network is named `NatNetwork`, uses the IPv4 prefix `10.0.0.0/24`, and has DHCP enabled.
 
-![VirtualBox NAT Network settings](screenshots/nat-network-settings.png)
+![VirtualBox NAT Network settings](01-nat-network-settings.png)
 
 ### 2. Kali Linux and Shared Folder
 
 The `sf_downloads` shared-folder shortcut is visible on the Kali desktop.
 
-![Kali desktop showing the shared folder](screenshots/kali-desktop-shared-folder.png)
+![Kali desktop showing the shared folder](02-kali-desktop-and-shared-folder.png)
 
 ### 3. Kali Static IPv4 Settings
 
 The NetworkManager profile is configured with the static IPv4 address, gateway, and DNS server shown below.
 
-![Kali static IPv4 settings](screenshots/kali-static-ip-settings.png)
+![Kali static IPv4 settings](03-kali-static-ip-settings.png)
 
 ## Setup Steps
 
