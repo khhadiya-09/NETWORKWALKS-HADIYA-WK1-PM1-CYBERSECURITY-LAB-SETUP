@@ -107,7 +107,7 @@ After that change, I configured Kali with the static address and verified gatewa
 - [x] Gateway, internet, and DNS tests passed
 - [x] Shared-folder read/write test passed
 - [x] Shared Clipboard tested
-- [ ] Create a clean VirtualBox snapshot — pending
+- [x] Create a clean VirtualBox snapshot 
 - [x] Investigated the drag-and-drop issue; transfer remains unresolved
 
 ## Responsible Use
@@ -120,7 +120,6 @@ This lab is intended for education and authorized cybersecurity testing only. Te
 Cybersecurity student | Computer Science Engineering (IoT & Cybersecurity)
 
 - **LinkedIn:** [linkedin.com/in/hadiya-khan-3aba54288](https://www.linkedin.com/in/hadiya-khan-3aba54288)
-- **GitHub:** Add this repository URL after creating it.
 
 ---
 
