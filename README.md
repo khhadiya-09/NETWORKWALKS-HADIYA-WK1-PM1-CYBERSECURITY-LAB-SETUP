@@ -106,7 +106,7 @@ After that change, I configured Kali with the static address and verified gatewa
 - [x] Gateway, internet, and DNS tests passed
 - [x] Shared-folder read/write test passed
 - [x] Shared Clipboard tested
-- [x] Create a clean VirtualBox snapshot 
+- [x] Created a VirtualBox snapshot: `Networkwalks-Week1-Working-Setup`
 - [x] Investigated the drag-and-drop issue; transfer remains unresolved
 
 ## Responsible Use
