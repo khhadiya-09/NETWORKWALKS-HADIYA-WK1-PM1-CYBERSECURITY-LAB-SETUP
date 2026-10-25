@@ -117,7 +117,7 @@ This lab is intended for education and authorized cybersecurity testing only. Te
 ## Author
 
 **Hadiya Khan**  
-Cybersecurity student | Computer Science Engineering (IoT & Cybersecurity)
+Cybersecurity student | Computer Science Engineering (IoT, Cybersecurity and Blockchain Technology)
 
 - **LinkedIn:** [linkedin.com/in/hadiya-khan-3aba54288](https://www.linkedin.com/in/hadiya-khan-3aba54288)
 
