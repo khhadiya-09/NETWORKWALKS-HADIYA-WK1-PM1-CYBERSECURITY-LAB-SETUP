@@ -1,106 +1,127 @@
-# Cybersecurity Lab Setup — Networkwalks Week 1
+<div align="center">
 
-A personal lab-setup project documenting my Kali Linux virtual machine and network configuration in Oracle VirtualBox. The goal is to prepare a controlled environment for future cybersecurity learning and authorized lab exercises.
+# Cybersecurity Lab Setup
 
-## Project goals
+**Networkwalks · Week 1 · Project Module 1**
 
-- Configure Oracle VirtualBox for a cybersecurity lab.
-- Create a NAT Network for the lab.
-- Configure Kali Linux with a static IPv4 address.
-- Verify gateway access, internet connectivity, and DNS resolution.
-- Share files between Windows and Kali Linux.
-- Record setup issues and the steps used to resolve them.
+A documented Kali Linux lab environment built with Oracle VirtualBox for cybersecurity learning and authorized testing.
 
-## Environment
+</div>
+
+---
+
+## About the Project
+
+This project documents my setup of a virtual cybersecurity lab using **Oracle VirtualBox** and **Kali Linux**. It covers NAT Network configuration, static IPv4 addressing, connectivity checks, shared-folder setup, and troubleshooting encountered during configuration.
+
+The goal is to prepare a repeatable environment for future cybersecurity labs and authorized security-testing exercises.
+
+## Environment and Configuration
 
 | Component | Configuration |
 |---|---|
 | Host operating system | Windows |
-| Virtualization software | Oracle VirtualBox 7.2.14 |
+| Virtualization platform | Oracle VirtualBox 7.2.14 |
 | Virtual machine | Kali Linux 2026.2 |
-| Virtual network mode | NAT Network |
+| Network mode | NAT Network |
 | NAT Network name | `NatNetwork` |
-| IPv4 network | `10.0.0.0/24` |
+| Network prefix | `10.0.0.0/24` |
 | Kali IPv4 address | `10.0.0.2/24` |
 | Default gateway | `10.0.0.1` |
-| DNS server configured in Kali | `8.8.8.8` |
+| DNS configured in Kali | `8.8.8.8` |
 | Shared folder | Windows Downloads, mounted in Kali at `/media/sf_downloads` |
 
 ## Screenshots
 
-### 1. NAT Network configuration
+Keep the `screenshots/` folder in the repository alongside this README. The image links below use relative paths, so the screenshots should render when the folder and filenames are uploaded unchanged.
 
-The VirtualBox NAT Network is configured with the IPv4 prefix `10.0.0.0/24` and DHCP enabled.
+### 1. VirtualBox NAT Network
 
-![VirtualBox NAT Network settings](screenshots/01-nat-network-settings.png)
+The NAT Network is named `NatNetwork`, uses the IPv4 prefix `10.0.0.0/24`, and has DHCP enabled.
 
-### 2. Kali desktop and shared folder
+![VirtualBox NAT Network settings](screenshots/nat-network-settings.png)
+
+### 2. Kali Linux and Shared Folder
 
 The `sf_downloads` shared-folder shortcut is visible on the Kali desktop.
 
-![Kali desktop with shared folder](screenshots/02-kali-desktop-and-shared-folder.png)
+![Kali desktop showing the shared folder](screenshots/kali-desktop-shared-folder.png)
 
-### 3. Kali static IPv4 configuration
+### 3. Kali Static IPv4 Settings
 
-The active NetworkManager profile is configured manually with the Kali address, gateway, and DNS server shown below.
+The NetworkManager profile is configured with the static IPv4 address, gateway, and DNS server shown below.
 
-![Kali IPv4 settings](screenshots/03-kali-static-ip-settings.png)
+![Kali static IPv4 settings](screenshots/kali-static-ip-settings.png)
 
-## Setup summary
+## Setup Steps
 
 1. Installed Oracle VirtualBox and imported the Kali Linux virtual machine.
 2. Created a NAT Network named `NatNetwork` with the IPv4 prefix `10.0.0.0/24`.
-3. Connected the Kali VM's network adapter to that NAT Network.
-4. Configured Kali's `Wired connection 1` with:
-   - Address: `10.0.0.2/24`
-   - Gateway: `10.0.0.1`
-   - DNS: `8.8.8.8`
-5. Enabled bidirectional shared clipboard and drag-and-drop in VirtualBox settings.
+3. Connected the Kali VM's network adapter to the NAT Network.
+4. Configured `Wired connection 1` in Kali with:
+   - **Address:** `10.0.0.2/24`
+   - **Gateway:** `10.0.0.1`
+   - **DNS:** `8.8.8.8`
+5. Enabled Bidirectional mode for Shared Clipboard and Drag and Drop in VirtualBox settings.
 6. Added the Windows Downloads folder as a VirtualBox shared folder with auto-mount enabled.
-7. Verified that Kali can access the shared folder and create a test file that appears in Windows.
+7. Tested access to the shared folder and confirmed that a file created in Kali appeared in Windows.
 
-## Verification performed
+## Verification
 
-| Check | Result |
+| Check | Observed result |
 |---|---|
-| Kali address and route | Confirmed `10.0.0.2/24` with default route via `10.0.0.1` |
+| Kali IP and route | `10.0.0.2/24`; default route via `10.0.0.1` |
 | Gateway connectivity | `ping -c 4 10.0.0.1` — 4 replies, 0% packet loss |
 | Internet connectivity by IP | `ping -c 4 1.1.1.1` — 4 replies, 0% packet loss |
-| DNS resolution and connectivity | `ping -c 4 google.com` — name resolved and 4 replies received |
-| Shared folder mounted | Confirmed at `/media/sf_downloads` |
+| DNS and connectivity | `ping -c 4 google.com` resolved the domain and received 4 replies |
+| Shared-folder mount | Available at `/media/sf_downloads` |
 | Shared-folder write test | Created `kali_share_test.txt` in Kali and confirmed it appeared in Windows Downloads |
-| Clipboard | Copy-paste tested successfully |
-| Drag-and-drop | Enabled in settings, but file transfer still reports “Can't drop data to guest”; unresolved |
+| Shared Clipboard | Copy-paste tested successfully |
+| Drag and Drop | Enabled in settings, but file transfer still displays “Can't drop data to guest”; unresolved |
 
-## Troubleshooting: DHCP address conflict
+## Troubleshooting: DHCP Address Conflict
 
-### Problem
+### Issue
 
-When I first tried to set Kali to `10.0.0.2/24`, NetworkManager reported that the address was already in use. The VirtualBox NAT Network DHCP server was also using `10.0.0.2`, which conflicted with the required static address for Kali.
+When I first configured Kali to use `10.0.0.2/24`, NetworkManager reported that the address was already in use. The NAT Network's DHCP server was also configured to use `10.0.0.2`, conflicting with the static address required for Kali.
 
 ### Resolution
 
-I updated the NAT Network DHCP server configuration from Windows using `VBoxManage`, moving its server address to `10.0.0.254` and limiting the lease range to `10.0.0.3`–`10.0.0.253`. This left `10.0.0.2` available for Kali's static address.
+I modified the VirtualBox NAT Network DHCP server configuration from Windows using `VBoxManage`. The DHCP server address was changed to `10.0.0.254`, and its lease range was set to `10.0.0.3`–`10.0.0.253`, leaving `10.0.0.2` available for Kali.
 
-I then configured Kali with the static address and re-tested the gateway, internet access, DNS, and shared-folder access.
+After that change, I configured Kali with the static address and verified gateway connectivity, internet access, DNS resolution, and shared-folder access.
 
-> The DHCP range and static address should be checked against the actual VirtualBox network configuration before reusing these settings in another lab.
+## What I Learned
 
-## Current status and next steps
+- How a VirtualBox NAT Network differs from a basic NAT adapter.
+- How to configure and verify a static IPv4 address, gateway, and DNS.
+- How to troubleshoot an IP address conflict between a DHCP server and a static VM address.
+- How to configure and test a VirtualBox shared folder.
+- Why connectivity tests and clear technical documentation matter when preparing a lab.
 
-- [x] VirtualBox and Kali configured
+## Current Status
+
+- [x] VirtualBox and Kali VM configured
 - [x] NAT Network configured
-- [x] Kali static IPv4 configuration verified
-- [x] Internet and DNS connectivity verified
-- [x] Shared folder access verified in both Windows and Kali
-- [x] Clipboard tested
-- [ ] Create a clean VirtualBox snapshot after confirming the baseline
-- [ ] Continue investigating the drag-and-drop issue
+- [x] Kali static IP configured and verified
+- [x] Gateway, internet, and DNS tests passed
+- [x] Shared-folder read/write test passed
+- [x] Shared Clipboard tested
+- [ ] Create a clean VirtualBox snapshot — pending
+- [x] Investigated the drag-and-drop issue; transfer remains unresolved
 
-## Safe and responsible use
+## Responsible Use
 
-This environment is intended for education and authorized cybersecurity testing only. Test only systems that you own or have explicit permission to assess.
+This lab is intended for education and authorized cybersecurity testing only. Test only systems you own or have explicit permission to assess.
 
-## Acknowledgement
+## Author
 
-Prepared as my own Week 1 lab-setup documentation for the Networkwalks cybersecurity program. The configuration, troubleshooting notes, and screenshots reflect my setup experience.
+**Hadiya Khan**  
+Cybersecurity student | Computer Science Engineering (IoT & Cybersecurity)
+
+- **LinkedIn:** [linkedin.com/in/hadiya-khan-3aba54288](https://www.linkedin.com/in/hadiya-khan-3aba54288)
+- **GitHub:** Add this repository URL after creating it.
+
+---
+
+*Networkwalks · Week 1 · Project Module 1 — Cybersecurity Lab Setup*
