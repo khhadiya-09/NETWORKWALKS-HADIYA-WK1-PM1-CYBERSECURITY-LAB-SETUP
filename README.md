@@ -52,6 +52,19 @@ The NetworkManager profile is configured with the static IPv4 address, gateway, 
 
 ![Kali static IPv4 settings](03-kali-static-ip-settings.png)
 
+### 4. Network Connectivity and DNS Verification
+
+The following checks confirm that Kali Linux can reach its default gateway, communicate with the configured DNS server, and resolve a domain name.
+
+![Kali Linux terminal showing IP configuration, gateway connectivity, and DNS lookup](04-kali-connectivity-verification.png)
+
+**Verification results:**
+- **Kali IPv4 address:** `10.0.0.2/24`
+- **Default gateway:** `10.0.0.1` — ping successful
+- **DNS server:** `8.8.8.8` — ping successful
+- **DNS resolution:** `networkwalks.com` resolved successfully
+
+
 ## Setup Steps
 
 1. Installed Oracle VirtualBox and imported the Kali Linux virtual machine.
